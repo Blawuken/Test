@@ -1,7 +1,7 @@
 name: zzzzzzz
 
 on:
-  workflow_dispatch:
+  push:
 
 defaults:
   run:
@@ -30,11 +30,17 @@ jobs:
           mkdir -p -m 0700 /root/.ssh
           cd /root/.ssh
           curl ${KNOWN_HOSTS} -o known_hosts
-
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           PUB_KEY: ${{ secrets.PUB_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Install MegaCmd ⏳
+        run: |
+          curl https://mega.nz/linux/MEGAsync/xUbuntu_20.04/amd64/megacmd_1.5.1-1.1_amd64.deb --output megacmd.deb
+          echo path-include /usr/share/doc/megacmd/* > /etc/dpkg/dpkg.cfg.d/docker
+          chmod +x megacmd.deb
+          sudo apt install ./megacmd.deb -y
 
       - name: Download 📥
         run: |
