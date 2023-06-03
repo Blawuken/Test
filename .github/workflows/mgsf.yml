@@ -1,0 +1,69 @@
+name: zzzzzzz
+
+on:
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  LINK: https://mega.nz/file/lxMHwTxS#vTgkzV0RCMn8tBda1mqrZH8vZYywOtZh_iPHRPzKuxo
+  LOGO: https://www.brandyports.com/attachments/cat33-jpg.14/
+  TG_TOKEN: ${{ secrets.TG_TOKEN }}
+  TG_ID: ${{ secrets.TG_ID }}
+  SF_USERNAME: ${{ secrets.SF_USER }}
+  SF_PASSWORD: ${{ secrets.SF_PASWORD }}
+  GAME_NAME: 𝗟𝗶𝗳𝗲 𝗶𝗻 𝗦𝗮𝗻𝘁𝗮 𝗖𝗼𝘂𝗻𝘁𝘆 [𝘃𝟬.𝟳.𝟮] [𝗕𝗼𝗹𝗱 𝗕𝗮𝘀𝗵 𝗦𝘁𝘂𝗱𝗶𝗼𝘀]
+  UPLOAD: asoy-gaming
+  TZ: Asia/Jakarta
+  LINK_MIRROR: https://sourceforge.net/projects/${UPLOAD}/files/$(cd $PWD && ls *apk)/download
+
+jobs:
+  deploy-android:
+    name: Asoy-Gaming
+    runs-on: ubuntu-latest
+    container:
+      image: anggit86/ubuntu:asoy
+
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: SSH agent 💻
+        uses: fastai/workflows/ssh@master
+        with:
+          ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          key_file: frs.sourceforge.net
+
+      - name: Download 📥
+        run: |
+          mega-get ${LINK} $PWD
+
+      - name: Upload 📤
+        run: |
+          sshpass -p ${SF_PASSWORD} scp $PWD/*.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
+
+      - name: Release 📝
+        run: |
+          telegram_message() {
+               curl -v "https://api.telegram.org/bot""${TG_TOKEN}""/sendPhoto?chat_id=""${TG_ID}""${ARGS_EXTRA}" -H 'Content-Type: multipart/form-data' \
+	           --form photo="LOGO" \
+               -F "parse_mode=html" \
+               -F caption="$1"
+          }
+          TXT_CAPTION="${GAME_NAME}
+          
+          <b>┏━─────────────</b>
+          <b>┃📥 Download Link:</b> <a href=\"${LINK_MIRROR}\">Here</a>
+          <b>┃🛡️ Ukuran: $(cd $PWD && ls -lh *apk | cut -d ' ' -f5)</b>
+          <b>┃📅 Tanggal: $(date +%d\ %B\ %Y)</b>
+          <b>┃🕔 Waktu: $(date +%T)</b>"
+          <b>┗━─────────────</b>
+          
+          <b>┏━──Extras</b>
+          <b>┃➥ Gallery Unlocked Mod</b>
+          <b>┃➥ Inc. Patch</b>
+          <b>┃➥ Walkthrough Pdf</b>
+          <b>┗━─────────────</b>
+          TG_TEXT="${TXT_CAPTION}"
+          telegram_message "$TG_TEXT"
