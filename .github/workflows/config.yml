@@ -9,16 +9,11 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: anggit86/ubuntu:asoy
 
     steps:
     - uses: actions/checkout@v3
-
-    - uses: shimataro/ssh-key-action@develop
-      with:
-        key: ${{ secrets.ANU_KEY }}
-        name: id_rsa
-        known_hosts: ${{ secrets.KNOWN_HOSTS }}
-        if_key_exists: ignore
 
     - name: Session Setup
       uses: mxschmitt/action-tmate@v3

@@ -2,7 +2,6 @@ name: zzzzzzz
 
 on:
   workflow_dispatch:
-  push:
 
 defaults:
   run:
