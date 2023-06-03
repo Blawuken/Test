@@ -47,7 +47,7 @@ jobs:
         run: |
           telegram_message() {
                curl -v "https://api.telegram.org/bot""${TG_TOKEN}""/sendPhoto?chat_id=""${TG_ID}""${ARGS_EXTRA}" -H 'Content-Type: multipart/form-data' \
-	           --form photo="LOGO" \
+               --form photo="LOGO" \
                -F "parse_mode=html" \
                -F caption="$1"
           }
