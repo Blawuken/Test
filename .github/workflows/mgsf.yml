@@ -24,13 +24,11 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Setup SSH 💻
-        run: |
-          sudo su && mkdir -p -m 0700 /root/.ssh
-          cd /root/.ssh
-          curl ${KNOWN_HOSTS} -o known_hosts
+        uses: fastai/workflows/ssh@master
+        with:
+          ssh_key: ${{ secrets.KNOWN_HOSTS }}
+          key_file: known_hosts
         env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-          PUB_KEY: ${{ secrets.PUB_KEY }}
           KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Install MegaCmd ⏳
