@@ -50,7 +50,7 @@ jobs:
 
       - name: Release 📝
         run: |
-          LINK_MIRROR=https://semawur.com/st/?api=12009627cdbda7809f8aa8a75007ec876ac0503c&url=https://sourceforge.net/projects/${UPLOAD}/files/$(cd $PWD && ls *apk)/download
+          LINK_MIRROR="https://semawur.com/st/?api=12009627cdbda7809f8aa8a75007ec876ac0503c&url=https://sourceforge.net/projects/${UPLOAD}/files/$(cd $PWD && ls *apk)/download"
           telegram_message() {
                curl -v "https://api.telegram.org/bot""$TG_TOKEN""/sendPhoto?chat_id=""$TG_ID""$ARGS_EXTRA" -H 'Content-Type: multipart/form-data' \
                --form photo="$LOGO" \
