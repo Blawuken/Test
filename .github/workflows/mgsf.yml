@@ -2,6 +2,7 @@ name: zzzzzzz
 
 on:
   workflow_dispatch:
+  push:
 
 defaults:
   run:
@@ -41,7 +42,8 @@ jobs:
 
       - name: Upload 📤
         run: |
-          sshpass -p ${SF_PASSWORD} scp $PWD/*.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
+          cd $PWD
+          sshpass -p ${SF_PASSWORD} scp *.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
 
       - name: Release 📝
         run: |
