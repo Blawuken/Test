@@ -52,15 +52,15 @@ jobs:
       - name: Release 📝
         run: |
           telegram_message() {
-               curl -v "https://api.telegram.org/bot""${TG_TOKEN}""/sendPhoto?chat_id=""${TG_ID}""${ARGS_EXTRA}" -H 'Content-Type: multipart/form-data' \
+               curl -v "https://api.telegram.org/bot""$TG_TOKEN""/sendPhoto?chat_id=""$TG_ID""$ARGS_EXTRA" -H 'Content-Type: multipart/form-data' \
                --form photo="LOGO" \
                -F "parse_mode=html" \
                -F caption="$1"
           }
-          TXT_CAPTION="${GAME_NAME}
+          TXT_CAPTION="$GAME_NAME
           
           <b>┏━─────────────</b>
-          <b>┃📥 Download Link:</b> <a href=\"${LINK_MIRROR}\">Here</a>
+          <b>┃📥 Download Link:</b> <a href=\"$LINK_MIRROR\">Here</a>
           <b>┃🛡️ Ukuran: $(cd $PWD && ls -lh *apk | cut -d ' ' -f5)</b>
           <b>┃📅 Tanggal: $(date +%d\ %B\ %Y)</b>
           <b>┃🕔 Waktu: $(date +%T)</b>
