@@ -43,7 +43,7 @@ jobs:
       - name: Upload 📤
         run: |
           cd $PWD
-          sshpass -p ${SF_PASSWORD} scp *.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
+          scp *.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
 
       - name: Release 📝
         run: |
