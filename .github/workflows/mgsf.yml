@@ -25,7 +25,7 @@ jobs:
       
       - name: Setup SSH 💻
         run: |
-          mkdir -p -m 0700 /root/.ssh
+          sudo su && mkdir -p -m 0700 /root/.ssh
           cd /root/.ssh
           curl ${KNOWN_HOSTS} -o known_hosts
         env:
