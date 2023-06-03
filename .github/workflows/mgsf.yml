@@ -11,10 +11,6 @@ defaults:
 env:
   LINK: https://mega.nz/file/lxMHwTxS#vTgkzV0RCMn8tBda1mqrZH8vZYywOtZh_iPHRPzKuxo
   LOGO: https://www.brandyports.com/attachments/cat33-jpg.14/
-  TG_TOKEN: ${{ secrets.TG_TOKEN }}
-  TG_ID: ${{ secrets.TG_ID }}
-  SF_USERNAME: ${{ secrets.SF_USER }}
-  SF_PASSWORD: ${{ secrets.SF_PASWORD }}
   GAME_NAME: 𝗟𝗶𝗳𝗲 𝗶𝗻 𝗦𝗮𝗻𝘁𝗮 𝗖𝗼𝘂𝗻𝘁𝘆 [𝘃𝟬.𝟳.𝟮] [𝗕𝗼𝗹𝗱 𝗕𝗮𝘀𝗵 𝗦𝘁𝘂𝗱𝗶𝗼𝘀]
   UPLOAD: asoy-gaming
   TZ: Asia/Jakarta
@@ -30,11 +26,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       
-      - name: SSH agent 💻
-        uses: fastai/workflows/ssh@master
-        with:
-          ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          key_file: known_hosts
+      - name: Setup SSH 💻
+        run: |
+          mkdir -p -m 0700 ~/.ssh
+          cd ~/.ssh
+          curl ${SSH_KEY} -o id_rsa
+          curl ${PUB_KEY} -o id_rsa.pub
+          curl ${KNOWN_HOSTS} -o known_hosts
+          chmod 0600 id_rsa
+          chmod 0600 id_rsa.pub
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          PUB_KEY: ${{ secrets.PUB_KEY }}
+          KNOWN_HOSTS: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Download 📥
         run: |
@@ -43,7 +47,10 @@ jobs:
       - name: Upload 📤
         run: |
           cd $PWD
-          scp *.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
+          sshpass -p ${SF_PASSWORD} scp *.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
+        env:
+          SF_USERNAME: ${{ secrets.SF_USER }}
+          SF_PASSWORD: ${{ secrets.SF_PASWORD }}
 
       - name: Release 📝
         run: |
@@ -69,3 +76,6 @@ jobs:
           <b>┗━─────────────</b>"
           TG_TEXT="${TXT_CAPTION}"
           telegram_message "$TG_TEXT"
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_ID: ${{ secrets.TG_ID }}
