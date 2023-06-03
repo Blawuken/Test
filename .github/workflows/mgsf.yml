@@ -30,8 +30,7 @@ jobs:
           mkdir -p -m 0700 /root/.ssh
           cd /root/.ssh
           curl ${KNOWN_HOSTS} -o known_hosts
-          chmod 0600 id_rsa
-          chmod 0600 id_rsa.pub
+
         env:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           PUB_KEY: ${{ secrets.PUB_KEY }}
