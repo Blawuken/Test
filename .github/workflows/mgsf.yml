@@ -57,13 +57,13 @@ jobs:
           <b>┃📥 Download Link:</b> <a href=\"${LINK_MIRROR}\">Here</a>
           <b>┃🛡️ Ukuran: $(cd $PWD && ls -lh *apk | cut -d ' ' -f5)</b>
           <b>┃📅 Tanggal: $(date +%d\ %B\ %Y)</b>
-          <b>┃🕔 Waktu: $(date +%T)</b>"
+          <b>┃🕔 Waktu: $(date +%T)</b>
           <b>┗━─────────────</b>
           
           <b>┏━──Extras</b>
           <b>┃➥ Gallery Unlocked Mod</b>
           <b>┃➥ Inc. Patch</b>
           <b>┃➥ Walkthrough Pdf</b>
-          <b>┗━─────────────</b>
+          <b>┗━─────────────</b>"
           TG_TEXT="${TXT_CAPTION}"
           telegram_message "$TG_TEXT"
