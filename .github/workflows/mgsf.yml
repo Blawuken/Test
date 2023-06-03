@@ -33,7 +33,7 @@ jobs:
         uses: fastai/workflows/ssh@master
         with:
           ssh_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          key_file: frs.sourceforge.net
+          key_file: known_hosts
 
       - name: Download 📥
         run: |
