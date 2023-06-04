@@ -8,9 +8,9 @@ defaults:
     shell: bash
 
 env:
-  LINK: https://mega.nz/file/lxMHwTxS#vTgkzV0RCMn8tBda1mqrZH8vZYywOtZh_iPHRPzKuxo
-  LOGO: https://telegra.ph/file/4891ffb615ea0b8bcb702.jpg
-  GAME_NAME: 𝗟𝗶𝗳𝗲 𝗶𝗻 𝗦𝗮𝗻𝘁𝗮 𝗖𝗼𝘂𝗻𝘁𝘆 [𝘃𝟬.𝟳.𝟮] [𝗕𝗼𝗹𝗱 𝗕𝗮𝘀𝗵 𝗦𝘁𝘂𝗱𝗶𝗼𝘀]
+  LINK: https://mega.nz/file/I81DRJwC#hiTFHmr78kmemnw9QMKpHCUSKYq1DAou7cqv10m2P44
+  LOGO: https://telegra.ph/file/d1ca85aac5234d7ed90f2.jpg
+  GAME_NAME: 𝗧𝗵𝗲 𝗚𝗲𝗻𝗲𝘀𝗶𝘀 𝗢𝗿𝗱𝗲𝗿 [𝘃.𝟳𝟳𝟬𝟲𝟭] [𝗡𝗟𝗧 𝗠𝗲𝗱𝗶𝗮]
   UPLOAD: asoy-gaming
   TZ: Asia/Jakarta
 
@@ -57,21 +57,7 @@ jobs:
                -F "parse_mode=html" \
                -F caption="$1"
           }
-          TXT_CAPTION="$GAME_NAME
-          
-          <b>┏━──────────────────</b>
-          <b>┃📥 Download Link:</b> <a href=\"$LINK_MIRROR\">Here</a>
-          <b>┃🛡️ Ukuran: $(cd $PWD && ls -lh *apk | cut -d ' ' -f5)</b>
-          <b>┃📅 Tanggal: $(date +%d\ %B\ %Y)</b>
-          <b>┃🕔 Waktu: $(date +%T)</b>
-          <b>┗━──────────────────</b>
-          
-          <b>┏━────Extras</b>
-          <b>┃➥ Gallery Unlocked Mod</b>
-          <b>┃➥ Inc. Patch</b>
-          <b>┃➥ Walkthrough Pdf</b>
-          <b>┗━──────────────────</b>"
-          TG_TEXT="${TXT_CAPTION}"
+          TG_TEXT="$(< tg.html)"
           telegram_message "$TG_TEXT"
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
