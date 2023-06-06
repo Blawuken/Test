@@ -39,6 +39,7 @@ jobs:
 
       - name: Setup config Rclone 💽
         run: |
+          sudo apt install rclone -y
           mkdir -p ~/.config/rclone
           echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
         env:
