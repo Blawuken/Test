@@ -18,9 +18,9 @@ jobs:
 
     - name: Test Build.. ⏳
       run: |
-        git clone https://Blawuken:$GITHUB_TOKEN@github.com/Blawuken/mirror-leech-telegram-bot anjay && cd anjay
+        git clone https://Blawuken:${GH_ANU}@github.com/Blawuken/mirror-leech-telegram-bot anjay && cd anjay
         pip3 install --upgrade pip wheel setuptools
         pip3 install --no-cache-dir -r requirements-cli.txt
         pip3 install --no-cache-dir -r requirements.txt
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_ANU: ${{ secrets.GH_ANU }}
