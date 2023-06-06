@@ -12,7 +12,7 @@ env:
   LOGO: https://telegra.ph/file/d1ca85aac5234d7ed90f2.jpg
   GAME_NAME: 𝗧𝗵𝗲 𝗚𝗲𝗻𝗲𝘀𝗶𝘀 𝗢𝗿𝗱𝗲𝗿 [𝘃.𝟳𝟳𝟬𝟲𝟭] [𝗡𝗟𝗧 𝗠𝗲𝗱𝗶𝗮]
   UPLOAD: asoy-gaming
-  INDEX_LINK: https://asoy-gaming.projek.workers.dev/0:
+  INDEX_LINK: "https://asoy-gaming.projek.workers.dev/0:"
   TZ: Asia/Jakarta
 
 jobs:
