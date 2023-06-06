@@ -12,6 +12,7 @@ env:
   LOGO: https://telegra.ph/file/d1ca85aac5234d7ed90f2.jpg
   GAME_NAME: 𝗧𝗵𝗲 𝗚𝗲𝗻𝗲𝘀𝗶𝘀 𝗢𝗿𝗱𝗲𝗿 [𝘃.𝟳𝟳𝟬𝟲𝟭] [𝗡𝗟𝗧 𝗠𝗲𝗱𝗶𝗮]
   UPLOAD: asoy-gaming
+  INDEX_LINK: https://asoy-gaming.projek.workers.dev/0:
   TZ: Asia/Jakarta
 
 jobs:
@@ -36,6 +37,13 @@ jobs:
           chmod +x megacmd.deb
           sudo apt install ./megacmd.deb -y
 
+      - name: Setup config Rclone 💽
+        run: |
+          mkdir -p ~/.config/rclone
+          echo "$RCLONE_CONF" > ~/.config/rclone/rclone.conf
+        env:
+          RCLONE_CONF: ${{ secrets.RCLONE_CONF }}
+
       - name: Download 📥
         run: |
           mega-get ${LINK} $PWD
@@ -43,6 +51,9 @@ jobs:
       - name: Upload 📤
         run: |
           cd $PWD
+          echo Upload to Google Drive..
+          rclone copy --drive-chunk-size 256M --stats 1s *.apk NFS: -P
+          echo Upload to Sourceforge..
           sshpass -p ${SF_PASSWORD} scp *.apk ${SF_USERNAME}@frs.sourceforge.net:/home/frs/project/${UPLOAD}
         env:
           SF_USERNAME: ${{ secrets.SF_USER }}
@@ -50,7 +61,9 @@ jobs:
 
       - name: Release 📝
         run: |
-          LINK_MIRROR="https://semawur.com/st/?api=12009627cdbda7809f8aa8a75007ec876ac0503c&url=https://sourceforge.net/projects/${UPLOAD}/files/$(cd $PWD && ls *apk)/download"
+          cd $PWD
+          LINK_SF="https://sourceforge.net/projects/${UPLOAD}/files/$(ls *apk)/download"
+          LINK_GDRIVE="$INDEX_LINK/$(ls *apk)"
           telegram_message() {
                curl -v "https://api.telegram.org/bot""$TG_TOKEN""/sendPhoto?chat_id=""$TG_ID""$ARGS_EXTRA" -H 'Content-Type: multipart/form-data' \
                --form photo="$LOGO" \
@@ -68,12 +81,12 @@ jobs:
           <b>┃Bahasa:</b> English
           <b>┗━──────────────────</b>
 
-          <b>┏━────Ringkasan</b>
+          <b>━────Ringkasan</b>
           The Genesis Order adalah chapter terbaru dalam saga NLT yang dimulai dengan Lust Epidemic, dilanjutkan di Treasure of Nadia dan sekarang akan memulai chapter baru di tahun 2021 bersamaan dengan berakhirnya Treasure of Nadia. Gim ini akan menampilkan beberapa wajah yang sudah dikenal serta banyak wajah baru, termasuk 13 wanita baru! Di TGO Anda akan bermain sebagai detektif junior yang mencoba mencari nafkah dan membaca dengan teliti hasrat Anda untuk memecahkan kejahatan dan bertemu wanita cantik. Kisah rumit ini terungkap dengan banyak liku-liku seperti yang Anda harapkan dari game NLT!
-          <b>┗━──────────────────</b>
+          <b>━──────────────────</b>
 
           <b>┏━──────────────────</b>
-          <b>┃📥 Download Link:</b> <a href=\"$LINK_MIRROR\">Here</a>
+          <b>┃📥 Download Link:</b> <a href=\"$LINK_SF\">Sourceforge</a> | <a href=\"$LINK_GDRIVE\">Gdrive</a>
           <b>┃🛡️ Ukuran: $(cd $PWD && ls -lh *apk | cut -d ' ' -f5)</b>
           <b>┃📅 Tanggal: $(date +%d\ %B\ %Y)</b>
           <b>┃🕔 Waktu: $(date +%T)</b>
