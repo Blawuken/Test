@@ -1,4 +1,4 @@
-const { Jb1 } = require('./lib/canvas')
+const { Jb1, Jb2 } = require('./lib/canvas')
 
 Jb2('Test', 'Doang')
 .then(console.log)
