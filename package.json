@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "chalk": "^4.1.2",
+    "knights-canvas": "git+https://github.com/Blawuken/knights-canvas"
+  }
+}
