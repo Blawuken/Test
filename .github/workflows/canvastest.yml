@@ -1,19 +1,24 @@
 name: Canvas Node Test
 
-on: 
+permissions:
+  contents: write
+
+on:
   push:
-defaults:
-  run:
-    shell: bash
+    branches:
+      - main
 
 jobs:
-  build:
+  update-nightly:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
+
+    - name: Fetching tags
+      run: git fetch --tags -f || true
 
     - name: Setup Node
       uses: actions/setup-node@v3.6.0
@@ -27,3 +32,11 @@ jobs:
     - name: Test
       run: |
         node test.js
+
+    - name: Update Nightly TAG
+      uses: richardsimko/update-tag@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: nightly
+    
