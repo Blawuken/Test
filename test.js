@@ -1,3 +1,5 @@
 const { Jb1 } = require('./lib/canvas')
 
-process.exit(Jb1('Test Doang'))
+Jb1('Test Doang')
+.then(console.log)
+.catch(console.error)

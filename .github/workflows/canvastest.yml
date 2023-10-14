@@ -31,7 +31,7 @@ jobs:
 
     - name: Test
       run: |
-        node test.js
+        node test.js & sleep 5s
 
     - name: Anu crot
       run: |
