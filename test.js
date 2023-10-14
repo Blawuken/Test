@@ -1,5 +1,5 @@
-const { Jb1, Jb2 } = require('./lib/canvas')
+const { Jb1, Jb2, Jb3 } = require('./lib/canvas')
 
-Jb2('Test', 'Doang')
+Jb3('https://i.ibb.co/DRr3mSw/danaqr.png')
 .then(console.log)
 .catch(console.error)
