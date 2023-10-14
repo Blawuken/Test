@@ -35,7 +35,7 @@ jobs:
 
     - name: Anu crot
       run: |
-        mv canvas/Jb1.png Jb1.png
+        ls canvas/*
 
     - name: Update Nightly Release
       uses: meeDamian/github-release@2.0
