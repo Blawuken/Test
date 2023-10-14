@@ -52,7 +52,7 @@ jobs:
         draft: false
         prerelease: true
         files: >
-          canvas/Jb3.png
+          canvas/Jb4.png
         gzip: folders
         allow_override: true
     
