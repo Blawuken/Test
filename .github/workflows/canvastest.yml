@@ -52,7 +52,7 @@ jobs:
         draft: false
         prerelease: true
         files: >
-          canvas/Jb4.png
+          canvas/OnePiece.png
         gzip: folders
         allow_override: true
     
