@@ -1,0 +1,15 @@
+<resources>
+    <string name="revanced_default_app_settings_summary">\'Open supported links\'</string>
+    <string name="revanced_hide_suggestions_shelf_summary">"Hides following shelves:
+• Breaking news
+• Continue watching
+• Explore more channels
+• Listen again
+• Shopping
+• Watch it Again"</string>
+    <string name="revanced_enable_wide_search_bar_in_you_tab_summary">"Enabling this setting will disable the settings button in the You tab.
+
+In this case, please use the following path:
+You tab > View channel > Menu > Settings."</string>
+    <string name="sb_stats_username" formatted="false">Your username: &lt;b>%s&lt;/b></string>
+</resources>
