@@ -2,6 +2,7 @@ name: Automatically Translate Android App
 
 on:  # yamllint disable-line rule:truthy
   push:
+  workflow_dispatch:
     branches: ["master", "main"]
     paths:
       - "**/strings.xml"
