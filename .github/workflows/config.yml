@@ -9,9 +9,7 @@ defaults:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: arm64v8/ubuntu:latest
-
+    
     steps:
     - uses: actions/checkout@v3
 
