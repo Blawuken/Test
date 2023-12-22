@@ -13,16 +13,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: JDK Setup
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'zulu'
-        java-version: |
-          8
-          11
-          17
-    - name: Install NDK
-      run: echo "y" | sudo ${ANDROID_HOME}/tools/bin/sdkmanager --install "ndk;21.0.6113669"
+    - name: Setup Java
+      run: echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
+
     - name: Session Setup
       uses: mxschmitt/action-tmate@v3
       timeout-minutes: 300
