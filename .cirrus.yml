@@ -7,19 +7,10 @@ task:
   stateful: true
   timeout_in: 120m
   container:
-    image: cirrusci/android-sdk:30
+    image: androidsdk/android-30:latest
     cpu: 8
     memory: 32G
 
-  create_device_script: >
-    echo no | avdmanager create avd --force \
-        -n test \
-        -k "system-images;android-30;default;armeabi-v8a"
-  start_emulator_background_script: >
-    $ANDROID_HOME/emulator/emulator \
-        -avd test \
-        -no-audio \
-        -no-window
   Clone_script:
     - mkdir -p Test && cd Test
     - git clone --depth 1 https://github.com/Blawuken/MicroG-Extended MicroG-Extended
