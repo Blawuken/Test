@@ -1,6 +1,7 @@
 env:
   CIRRUS_CLONE_DEPTH: 1
   CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
+  JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
 
 task:
   name: "Gradle"
@@ -14,6 +15,9 @@ task:
   Clone_script:
     - mkdir -p Test && cd Test
     - git clone --depth 1 https://github.com/Blawuken/MicroG-Extended MicroG-Extended
+  Update_script:
+    - apt-get update -y && apt-get upgrade -y
+    - apt-get -y install openjdk-17*
   # assemble while emulator is starting
   tests_script:
     - cd Test/MicroG-Extended
