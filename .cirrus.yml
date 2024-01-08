@@ -8,7 +8,7 @@ task:
     memory: 32G
 
   clone_repo:
-    git clone https://github.com/Blawuken/MicroG-Extended
+    git clone https://github.com/Blawuken/MicroG-Extended MicroG-Extended
   # assemble while emulator is starting
   tests_script:
     - cd MicroG-Extended
