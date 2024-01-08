@@ -3,16 +3,16 @@ task:
   stateful: true
   timeout_in: 120m
   container:
-    image: ghcr.io/cirruslabs/android-sdk:34
+    image: ghcr.io/cirruslabs/android-sdk:30
     cpu: 8
     memory: 32G
 
   install_emulator_script:
-    sdkmanager --install "system-images;android-34;google_apis;x86"
+    sdkmanager --install "system-images;android-30;google_apis;x86"
   create_avd_script:
     echo no | avdmanager create avd --force
       -n emulator
-      -k "system-images;android-34;google_apis;x86"
+      -k "system-images;android-30;google_apis;x86"
   start_avd_background_script:
     $ANDROID_HOME/emulator/emulator
       -avd emulator
