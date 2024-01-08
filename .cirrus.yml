@@ -11,12 +11,13 @@ task:
     cpu: 8
     memory: 32G
 
-  clone_repo:
-    - git clone https://github.com/Blawuken/MicroG-Extended $CIRRUS_WORKING_DIR/MicroG-Extended
+  Clone_script:
+    - mkdir -p Test && cd Test
+    - git clone --depth 1 https://github.com/Blawuken/MicroG-Extended MicroG-Extended
   # assemble while emulator is starting
   tests_script:
-    - cd $CIRRUS_WORKING_DIR/MicroG-Extended
+    - cd Test/MicroG-Extended
     - ./gradlew assemble
   release_script:
-    - cd $CIRRUS_WORKING_DIR/MicroG-Extended
+    - cd Test/MicroG-Extended
     - ./gradlew assembleRelease
