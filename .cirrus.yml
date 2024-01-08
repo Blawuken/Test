@@ -7,7 +7,7 @@ task:
   stateful: true
   timeout_in: 120m
   container:
-    image: reactivecircus/android-sdk:latest
+    image: anggit86/docker:cirrus
     cpu: 8
     memory: 32G
 
