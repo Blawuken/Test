@@ -1,27 +1,21 @@
 env:
   CIRRUS_CLONE_DEPTH: 1
   CIRRUS_WORKING_DIR: /tmp/cirrus-ci-build
-  JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
 
 task:
   name: "Gradle"
   stateful: true
   timeout_in: 120m
   container:
-    image: androidsdk/android-30:latest
+    image: anggit86/android-sdk:latest
     cpu: 8
     memory: 32G
 
   Clone_script:
-    - mkdir -p Test && cd Test
     - git clone --depth 1 https://github.com/Blawuken/MicroG-Extended MicroG-Extended
-  Update_script:
-    - apt-get update -y && apt-get upgrade -y
-    - apt-get -y install openjdk-17*
-  # assemble while emulator is starting
   tests_script:
-    - cd Test/MicroG-Extended
+    - cd MicroG-Extended
     - ./gradlew assemble
   release_script:
-    - cd Test/MicroG-Extended
+    - cd MicroG-Extended
     - ./gradlew assembleRelease
