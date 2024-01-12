@@ -20,19 +20,15 @@ jobs:
         java-version: "17"
         distribution: "zulu"
 
-    - uses: r0adkll/sign-android-release@v1.0.4
-      name: Sign app APK
-      # ID used to access action output
-      id: sign_app
+    - name: Sign APK
+      id: sign_apk
+      uses: ilharp/sign-android-release@v1
       with:
-        releaseDirectory: app
-        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-        alias: ${{ secrets.ALIAS }}
+        releaseDir: app
+        signingKey: ${{ secrets.SIGNING_KEY }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-      env:
-        # override default build-tools version (29.0.3) -- optional
-        BUILD_TOOLS_VERSION: "34.0.0"
+        keyAlias: ${{ secrets.ALIAS }}
+        keyPassword: ${{ secrets.KEY_STORE_PASSWORD }}
 
     # Example use of `signedReleaseFile` output -- not needed
     - uses: actions/upload-artifact@v2
