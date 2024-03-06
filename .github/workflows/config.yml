@@ -17,10 +17,10 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: 8
+        java-version: 17
 
     - name: Setup Java
-      run: echo "JAVA_HOME=$JAVA_HOME_8_X64" >> $GITHUB_ENV
+      run: echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
 
     - name: Session Setup
       uses: mxschmitt/action-tmate@v3
