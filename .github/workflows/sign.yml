@@ -2,7 +2,6 @@ name: App Sign
 
 on: 
   workflow_dispatch:
-  push:
 defaults:
   run:
     shell: bash
