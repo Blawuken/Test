@@ -60,7 +60,7 @@ jobs:
 
     - name: Update library
       run: |
-        cd ${{ github.workspace }}/V2rayNG
+        cd ${{ github.workspace }}/v2rayNG/V2rayNG
         git config --global user.email jarbull87@gmail.com
         git config --global user.name Blawuken
         git add . -f
