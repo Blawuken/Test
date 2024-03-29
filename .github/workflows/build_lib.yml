@@ -44,7 +44,7 @@ jobs:
 
     - name: Build dependencies
       run: |
-        git clone https://Blawuken:$GITHUB_TOKEN@github.com/Blawuken/v2rayNG
+        git clone https://Blawuken:${GITHUB_TOKEN}@github.com/Blawuken/v2rayNG
         mkdir ${{ github.workspace }}/v2rayNG/build
         cd ${{ github.workspace }}/v2rayNG/build
         git clone --depth=1 -b main https://github.com/2dust/AndroidLibXrayLite.git
@@ -57,3 +57,12 @@ jobs:
         echo "======================================="
         ls -all
         echo "======================================="
+
+    - name: Update library
+      run: |
+        cd ${{ github.workspace }}/V2rayNG
+        git config --global user.email jarbull87@gmail.com
+        git config --global user.name Blawuken
+        git add . -f
+        git commit -m "Update libcore library ${date}"
+        git push
